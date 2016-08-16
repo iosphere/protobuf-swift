@@ -572,6 +572,9 @@ public class CodedInputStream {
 
     public func readData() throws -> Data {
         let size = Int(try readRawVarint32())
+        return try readRawData(size: size)
+        // TODO: Re-implement in Swift 3.0 beta 6 or higher
+        /* Swift 3 b 6 incompatible implementation:
         if size < bufferSize - bufferPos && size > 0 {
             let pointer = UnsafeMutablePointerInt8From(data: buffer)
             
@@ -580,7 +583,8 @@ public class CodedInputStream {
             return data
         } else {
             return try readRawData(size: size)
-        }
+       }
+       */
     }
 
     public func readUInt32() throws -> UInt32 {
